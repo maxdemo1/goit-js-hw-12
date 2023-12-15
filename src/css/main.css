@@ -1,0 +1,191 @@
+/* montserrat-regular - latin */
+@font-face {
+  font-display: swap;
+  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/montserrat-v26-latin-regular.woff2') format('woff2');
+  /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* montserrat-500 - latin */
+@font-face {
+  font-display: swap;
+  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  src: url('../fonts/montserrat-v26-latin-500.woff2') format('woff2');
+  /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+body {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+  padding-top: 20px;
+}
+
+.search-form {
+  font-family: Montserrat;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.search-form input {
+  font-family: inherit;
+  padding: 8px 0 8px 16px;
+  width: 272px;
+  color: black;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  outline: none;
+  border-radius: 4px;
+  border: 1px solid #808080;
+}
+
+.search-form input::placeholder {
+  color: #808080;
+}
+
+.search-form button {
+  padding: 8px 16px;
+  border-radius: 8px;
+  background-color: #4E75FF;
+  border: 1px solid #4E75FF;
+  color: #FFF;
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.04em
+}
+
+.gallery {
+  justify-content: center;
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  max-width: 1128px;
+  margin: 16px auto 16px auto;
+}
+
+.gallery .gallery-item {
+  width: 360px;
+  overflow: hidden;
+}
+
+.gallery-image {
+  width: 360px;
+  height: 200px;
+  object-fit: cover;
+}
+
+.characteristics-name-list {
+  display: flex;
+  gap: 30px;
+  padding-left: 20px;
+}
+
+.characteristics-value-list {
+  display: flex;
+  justify-content: space-around;
+}
+
+.characteristics-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.photo-characteristics {
+  margin-top: 8px;
+  color: #808080;
+  font-family: Montserrat;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.photo-characteristics p:first-child {
+  color: black;
+  font-weight: 500;
+}
+
+.loader {
+  display: block;
+  margin: 36px auto;
+}
+
+.loader,
+.loader:before,
+.loader:after {
+  border-radius: 50%;
+  width: 2.5em;
+  height: 2.5em;
+  animation-fill-mode: both;
+  animation: bblFadInOut 1.8s infinite ease-in-out;
+}
+
+.loader {
+  color: black;
+  font-size: 7px;
+  position: relative;
+  text-indent: -9999em;
+  transform: translateZ(0);
+  animation-delay: -0.16s;
+}
+
+.loader:before,
+.loader:after {
+  content: '';
+  position: absolute;
+  top: 0;
+}
+
+.loader:before {
+  left: -3.5em;
+  animation-delay: -0.32s;
+}
+
+.loader:after {
+  left: 3.5em;
+}
+
+@keyframes bblFadInOut {
+
+  0%,
+  80%,
+  100% {
+    box-shadow: 0 2.5em 0 -1.3em
+  }
+
+  40% {
+    box-shadow: 0 2.5em 0 0
+  }
+}
+
+.loader {
+  display: none;
+}
+
+.next-page-btn {
+  display: none;
+  margin: 36px auto;
+  padding: 8px 16px;
+  border-radius: 8px;
+  background-color: #4E75FF;
+  border: 1px solid #4E75FF;
+  color: #FFF;
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.04em
+}
+
+.upd {
+  padding: 0;
+}
