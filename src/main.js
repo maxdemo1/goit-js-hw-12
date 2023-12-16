@@ -11,6 +11,7 @@ const searchForm = document.querySelector('.search-form');
 const searchQuery = searchForm.querySelector('[name="search-query"]');
 const loading = document.querySelector('.loader');
 const nextPage = document.querySelector('.next-page-btn');
+let hitsCounter = 0;
 let gallery = document.querySelector('.gallery');
 let lightbox = new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
@@ -31,10 +32,13 @@ const pixabayOptions = {
 
 const mainObject = {
   async httpsRequest() {
+    hitsCounter = 0;
     loading.style.display = 'block';
     this.removeChilds();
     try {
       const posts = await axios.get('/api/?', pixabayOptions);
+      this.totalHitsCheck(posts);
+      console.log(posts.data);
       this.resultsRunner(posts);
     } catch (error) {
       iziToast.show({
@@ -53,17 +57,10 @@ const mainObject = {
     nextPage.style.display = 'none';
     try {
       const posts = await axios.get('/api/?', pixabayOptions);
-      if (posts.data.hits.length == 0) {
-        loading.style.display = 'none';
-        iziToast.show({
-          message: "We're sorry, but you've reached the end of search results.",
-          messageColor: 'white',
-          backgroundColor: 'rgb(255, 132, 132)',
-          position: 'topRight',
-        });
-      } else {
-        this.resultsRunner(posts);
-      }
+      console.log(posts);
+      this.totalHitsCheck(posts);
+      console.log(posts.data);
+      this.resultsRunner(posts);
     } catch (error) {
       iziToast.show({
         message: 'Looks like we got some errors =(',
@@ -135,10 +132,14 @@ const mainObject = {
   },
 
   resultsRunner(posts) {
-    if (posts.data.hits.length > 0) {
+    if (posts.data.hits.length == 40) {
       this.imagesOnPage(posts);
       nextPage.style.display = 'block';
       loading.style.display = 'none';
+    } else if (posts.data.hits.length < 40 && posts.data.hits.length > 0) {
+      this.imagesOnPage(posts);
+      loading.style.display = 'none';
+      nextPage.style.display = 'none';
     } else {
       this.noResults();
       loading.style.display = 'none';
@@ -152,6 +153,22 @@ const mainObject = {
       top: window.scrollY + (scrollStep.height * 2 + 48),
       behavior: 'smooth',
     });
+  },
+
+  totalHitsCheck(posts) {
+    console.log('im try');
+    hitsCounter += posts.data.hits.length;
+    console.log('im done');
+    console.log(hitsCounter);
+    if (hitsCounter >= posts.data.totalHits && hitsCounter != 0) {
+      nextPage.style.display = 'none';
+      iziToast.show({
+        message: "We're sorry, but you've reached the end of search results.",
+        messageColor: 'white',
+        backgroundColor: 'rgb(255, 132, 132)',
+        position: 'topRight',
+      });
+    }
   },
 };
 
